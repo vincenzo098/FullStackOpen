@@ -43,7 +43,6 @@ const App = () => {
   }
 
   const handleChange = (event) => {
-    console.log(event.target)
     const { name, value } = event.target
     if(name === 'filter') setFilter(value)
     if(name === 'name') setNewName(value)
@@ -55,11 +54,15 @@ const App = () => {
   )
 
   const removePerson = (person) => {
-    console.log("mother fucker clicked on", person.name)
     personService
       .remove(person.id)
-      .then(updatedPersons =>{
-        setPersons(updatedPersons)
+      .then(() =>{
+        setPersons(updatedPersons => 
+          updatedPersons.filter(p =>p.id !== person.id)
+        )
+      })
+      .catch(error => {
+        console.error('Error deleting person: ', error)
       })
   }
 

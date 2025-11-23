@@ -14,7 +14,6 @@ mongoose.set('strictQuery', false)
 mongoose.connect(url, { family:4 })
 
 const personSchema = new mongoose.Schema({
-    id: Number,
     name: String, 
     number: String,
 })
